@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 
 # This is the set-up script for Google Cloud.
 sudo apt-get update
@@ -11,7 +11,7 @@ pip install pillow
 sudo apt-get build-dep python-imaging
 sudo apt-get install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
 sudo pip install virtualenv  
-virtualenv .env                  # Create a virtual environment
+virtualenv -p python3 .env                  # Create a virtual environment
 source .env/bin/activate         # Activate the virtual environment
 pip install -r requirements.txt  # Install dependencies
 deactivate
@@ -21,4 +21,13 @@ echo "**************************************************"
 echo ""
 echo "If you had no errors, You can proceed to work with your virtualenv as normal."
 echo "(run 'source .env/bin/activate' in your assignment directory to load the venv,"
-echo " and run 'deactivate' to exit the venv. See assignment handout for details.)"
+echo " and run 'deactivate' to exit the venv. See assignment handout for details."
+quit
+quit
+"quit"
+
+
+
+--quit
+
+

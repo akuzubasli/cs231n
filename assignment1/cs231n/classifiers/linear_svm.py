@@ -56,6 +56,7 @@ def svm_loss_naive(W, X, y, reg):
   # code above to compute the gradient.                                       #
   #############################################################################
 
+
   return loss, dW
 
 
@@ -100,9 +101,9 @@ def svm_loss_vectorized(W, X, y, reg):
   # doğru class scorundan delta kadar az olmasını istiyor. Eğer delta kadar azsa ok demektir ve loss'u artırmıyor.
   # gradient update için backpropagation yapmıyor. Yanlış olan her bir class, margin 0'dan büyükse bu miktarda loss'u artırıyor ve
   # yanlış her bir class ilgili weight'in (W*X) azaltılması için o class'a denk gelen X[i] kadar azaltılması için 
-  # backpropagation -(dW = X[i] > 0) yapıyor. 
+  # backpropagation -(dW = X[i] > 0) yapıyor. 
   # diğer yandan, margin > 0 olan yanlış her bir class doğru class'ın scorunun X[i] kadar artırılması için 
-  # -(dW = -X[i]) backpropagation yapıyor.
+  # -(dW = -X[i]) backpropagation yapıyor.
   
   # Bu nedenle, yanlış classlardan margin > 0 olanları belirlememiz ve onlara göre 
   # doğru ve yanlış class weightleri için update vermemiz gerekiyor. 
@@ -118,10 +119,5 @@ def svm_loss_vectorized(W, X, y, reg):
   dW /= num_train # average out the weights stated by each sample x[i]
   dW += reg * W # regularize the weights
   
-
-  pass
-  #############################################################################
-  #                             END OF YOUR CODE                              #
-  #############################################################################
 
   return loss, dW
