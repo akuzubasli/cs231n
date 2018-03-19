@@ -23,6 +23,7 @@ __pycache__/
 *.rar
 *.tar
 *.zip
+*.ckpt
 
 # Logs and databases #
 ######################
