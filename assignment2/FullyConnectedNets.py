@@ -747,11 +747,10 @@ best_net = None # store the best model into this
 best_val = -1
 
 results = {}
-histories = {}
-number_of_epochs = [5]
+number_of_epochs = [10]
 learning_rates = [1e-4]
 regularization_strengths = [0.05]
-dropout = [0, 0.9]
+dropout = [0.9, 0.7, 0]
 num_layers = 4
 hidden_size = [400]
 
@@ -767,36 +766,26 @@ for hid_size in hidden_size:
             solver = Solver(model, data,
               num_epochs=num_epoch, batch_size=200,
               update_rule="adam",
-              print_every = 50,
               optim_config={
                 'learning_rate': lr
               },
               verbose=True)
             solver.train()
             val_acc = solver.check_accuracy(data["X_val"], data["y_val"], batch_size=200)
-            toc = time.time()
             est_time = toc - tic
-            results[(lr, reg, p)] = (val_acc, est_time) 
-            histories[(lr, reg, p)] = (solver.loss_history, solver.train_acc_history, solver.val_acc_history)
-            plt.title('Training loss')
-            plt.plot(solver.loss_history, 'o')
-            plt.xlabel('Iteration')
+            results[(hidden_dims, lr, reg, p)] = (val_acc, est_time)
             if val_acc > best_val:
               best_val = val_acc
               best_model = model
-              best_solver = solver
               print("best val accuracy : %f when lr: %2.e , reg: %.2f and p: %.2f" % (val_acc, lr, reg, p))
 
 pass
 
 # Print out results.
-for lr, reg, p in sorted(results):
-    val_accuracy, est_time = results[(lr, reg, p)]
-    loss_his, train_acc_his, val_acc_his = histories[(lr, reg, p)]
-    print('lr %.2E // reg %.2f // p %.2f - val accuracy: %f - time: %fs' % (lr, reg, p, val_accuracy, est_time))
-    plt.title('Training loss')
-    plt.plot(loss_his, 'o', label=(str(lr)+"//"+str(reg)+"//"+str(p)))
-    plt.xlabel('Iteration')
+for hidden_dims, lr, reg, p in sorted(results):
+    val_accuracy, est_time = results[(hidden_dims, lr, reg, p)]
+    print('lr %.2E // reg %.2f // p %.2f - val accuracy: %f - time: %fs' % (
+                hidden_dims, lr, reg, p, val_accuracy, est_time))
 ################################################################################
 #                              END OF YOUR CODE                                #
 ################################################################################
@@ -807,10 +796,6 @@ for lr, reg, p in sorted(results):
 
 # In[ ]:
 # Run this cell to visualize training loss and train / val accuracy
-solver = best_solver
-
-
-
 plt.subplot(2, 1, 1)
 plt.title('Training loss')
 plt.plot(solver.loss_history, 'o')
