@@ -3,8 +3,8 @@
 .env/*
 
 # Directories #
-__pycache__/
-.ipynb_checkpoints/
+__pycache_/*
+.ipynb_checkpoints/*
 
 # Compiled source #
 ###################
