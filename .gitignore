@@ -24,6 +24,9 @@ __pycache__/
 *.tar
 *.zip
 *.ckpt
+*.jpg
+*.jpeg
+*.JPEG
 
 # Logs and databases #
 ######################
